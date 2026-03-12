@@ -1,0 +1,36 @@
+# Зависимости
+node_modules/
+
+# Сборка
+dist/
+artifacts/
+
+# Секреты (ВАЖНО)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Логи
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Тесты и покрытие
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Система
+.DS_Store
+Thumbs.db

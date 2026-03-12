@@ -1,0 +1,118 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id         String     @id @default(cuid())
+  email      String     @unique
+  password   String
+  role       Role       @default(USER)
+  firstName  String     @map("first_name")
+  lastName   String     @map("last_name")
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+  businesses Business[]
+  orders     Order[]
+  imageUrl   String[]    @map("image_url")
+
+
+  @@map("users")
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  userId    String      @map("user_id")
+  businessId String     @map("business_id")
+  status    OrderStatus @default(PENDING)
+  total     Float
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+  items     OrderItem[]
+  user      User        @relation(fields: [userId], references: [id])
+  business  Business    @relation(fields:[businessId], references: [id])
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String  @map("order_id")
+  productId String  @map("product_id")
+  quantity  Int
+  price     Float
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  category    String
+  expiryDate  DateTime    @map("expiry_date")
+  quantity    Int
+  isActive    Boolean     @default(true) @map("is_active")
+  businessId  String      @map("business_id")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+  orderItems  OrderItem[]
+  business    Business    @relation(fields: [businessId], references: [id])
+  imageUrl    String[]     @map("image_url")
+
+  @@map("products")
+}
+
+model Business {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  ownerId     String    @map("owner_id")
+  locationId  String
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  location    Location  @relation(fields: [locationId], references: [id])
+  owner       User      @relation(fields: [ownerId], references: [id])
+  products    Product[]
+  imageUrl    String[]   @map("image_url")
+  orders     Order[]
+
+
+  @@map("businesses")
+}
+
+model Location {
+  id         String     @id @default(cuid())
+  lat        Float
+  lng        Float
+  address    String
+  businesses Business[]
+
+  @@map("locations")
+}
+
+enum Role {
+  USER
+  BUSINESS
+  ADMIN
+
+  @@map("roles")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+
+  @@map("order_statuses")
+}
