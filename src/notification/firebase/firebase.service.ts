@@ -9,7 +9,7 @@ export class FirebaseService implements OnModuleInit {
         try {   
             this.app = admin.initializeApp({
                 credential: admin.credential.cert(
-                process.env.FIREBASE_SERVICE_ACCOUNT_PATH || './src/config/firebase-service-account.json'  
+                process.env.FIREBASE_CREDENTIALS || './src/config/firebase-service-account.json'  
                 ),
             });
         } catch (error) {

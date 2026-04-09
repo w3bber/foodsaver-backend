@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: foodsaver-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-foodsaver}
+      POSTGRES_USER: ${DB_USER:-foodsaver_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-foodsaver_pass}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-foodsaver_user}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - foodsaver-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  foodsaver-network:
+    driver: bridge
