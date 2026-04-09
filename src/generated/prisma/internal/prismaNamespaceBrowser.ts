@@ -54,7 +54,9 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   Product: 'Product',
   Business: 'Business',
-  Location: 'Location'
+  Location: 'Location',
+  DeviceToken: 'DeviceToken',
+  FavoriteBusiness: 'FavoriteBusiness'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -152,6 +154,29 @@ export const LocationScalarFieldEnum = {
 } as const
 
 export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+export const DeviceTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  platform: 'platform',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeviceTokenScalarFieldEnum = (typeof DeviceTokenScalarFieldEnum)[keyof typeof DeviceTokenScalarFieldEnum]
+
+
+export const FavoriteBusinessScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  businessId: 'businessId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FavoriteBusinessScalarFieldEnum = (typeof FavoriteBusinessScalarFieldEnum)[keyof typeof FavoriteBusinessScalarFieldEnum]
 
 
 export const SortOrder = {

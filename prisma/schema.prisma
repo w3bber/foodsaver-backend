@@ -21,9 +21,11 @@ model User {
   businesses Business[]
   orders     Order[]
   imageUrl   String[]    @map("image_url")
-
+  deviceTokens DeviceToken[] 
+  favoriteBusinesses FavoriteBusiness[]
 
   @@map("users")
+  
 }
 
 model Order {
@@ -85,7 +87,7 @@ model Business {
   products    Product[]
   imageUrl    String[]   @map("image_url")
   orders     Order[]
-
+  favoriteBusinesses FavoriteBusiness[]
 
   @@map("businesses")
 }
@@ -115,4 +117,29 @@ enum OrderStatus {
   COMPLETED
 
   @@map("order_statuses")
+}
+
+model DeviceToken {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  platform  String    //"ios", "android"
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("device_tokens")
+}
+
+model FavoriteBusiness {
+  id        String   @id @default(cuid())
+  userId     String   @map("user_id")
+  businessId String   @map("business_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  user       User     @relation(fields: [userId], references: [id])
+  business   Business @relation(fields: [businessId], references: [id])
+
+  @@unique([userId, businessId])
+  @@map("favorite_businesses")
 }

@@ -2,10 +2,14 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
+import { NotificationService } from "src/notification/notification.service";
 
 @Injectable()
 export class ProductService {
-    constructor(private prismaService: PrismaService) {}
+    constructor(
+        private prismaService: PrismaService, 
+        private notificationService: NotificationService
+    ) {}
 
     async createProduct(dto: CreateProductDto) {
         return this.prismaService.product.create({
@@ -74,11 +78,30 @@ export class ProductService {
     }
 
     async updateProduct(id: string, dto: UpdateProductDto) {
-        return this.prismaService.product.update({
+        const existingProduct = await this.prismaService.product.findUnique({
+            where: { id },
+            select: { price: true, quantity: true, businessId: true },
+        });
+
+        if (!existingProduct) {
+            throw new NotFoundException('Product not found');
+        }
+        const updatedProduct = await this.prismaService.product.update({
             where: { id },
             data: dto,
         });
+
+        const priceChanged = dto.price !== undefined && dto.price !== existingProduct.price;
+        const quantityChanged = dto.quantity !== undefined && dto.quantity !== existingProduct.quantity;
+
+        if (priceChanged || quantityChanged) {
+            this.notificationService.notifyProductRestock(updatedProduct.businessId)
+                .catch(err => console.error('Failed to send notification:', err));
+        }
+
+        return updatedProduct;
     }
+    
 
     async deleteProduct(id: string) {
         return this.prismaService.product.delete({

@@ -3,6 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { CreateOrderDto } from "./dto/create-order.dto";
 import { OrderStatus } from "src/generated/prisma/browser";
 import { UpdateOrderDto } from "./dto/update-order.dto";
+import { NotificationService } from "src/notification/notification.service";
 
 interface OrderItem {
     productId: string;
@@ -12,7 +13,7 @@ interface OrderItem {
 
 @Injectable()
 export class OrderService {
-    constructor(private prismaService: PrismaService) {}
+    constructor(private prismaService: PrismaService, private notificationService: NotificationService) {}
 
     async createOrder(userId: string, dto: CreateOrderDto) {
         const { items, status = OrderStatus.PENDING, businessId } = dto;
@@ -85,6 +86,9 @@ export class OrderService {
             });
         }
 
+        this.notificationService.notifyNewOrder(order)
+            .catch(err => console.error('Failed to send notification:', err));
+
         return order;
     }
 
@@ -145,10 +149,17 @@ export class OrderService {
     }
 
     async updateOrder(id: string, dto: UpdateOrderDto) {
-        return this.prismaService.order.update({
+        const updatedOrder = await this.prismaService.order.update({
             where: { id },
             data: dto,
         });
+
+        if (dto.status === OrderStatus.COMPLETED) {
+            this.notificationService.notifyOrderCompleted(updatedOrder)
+                .catch(err => console.error('Failed to send notification:', err));
+        }
+
+        return updatedOrder;
     }
 
     async deleteOrder(id: string) { 

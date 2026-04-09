@@ -395,7 +395,9 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   Product: 'Product',
   Business: 'Business',
-  Location: 'Location'
+  Location: 'Location',
+  DeviceToken: 'DeviceToken',
+  FavoriteBusiness: 'FavoriteBusiness'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "order" | "orderItem" | "product" | "business" | "location"
+    modelProps: "user" | "order" | "orderItem" | "product" | "business" | "location" | "deviceToken" | "favoriteBusiness"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -859,6 +861,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DeviceToken: {
+      payload: Prisma.$DeviceTokenPayload<ExtArgs>
+      fields: Prisma.DeviceTokenFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeviceTokenFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeviceTokenFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>
+        }
+        findFirst: {
+          args: Prisma.DeviceTokenFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeviceTokenFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>
+        }
+        findMany: {
+          args: Prisma.DeviceTokenFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>[]
+        }
+        create: {
+          args: Prisma.DeviceTokenCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>
+        }
+        createMany: {
+          args: Prisma.DeviceTokenCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeviceTokenCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>[]
+        }
+        delete: {
+          args: Prisma.DeviceTokenDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>
+        }
+        update: {
+          args: Prisma.DeviceTokenUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeviceTokenDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeviceTokenUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeviceTokenUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>[]
+        }
+        upsert: {
+          args: Prisma.DeviceTokenUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeviceTokenPayload>
+        }
+        aggregate: {
+          args: Prisma.DeviceTokenAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeviceToken>
+        }
+        groupBy: {
+          args: Prisma.DeviceTokenGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeviceTokenGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeviceTokenCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeviceTokenCountAggregateOutputType> | number
+        }
+      }
+    }
+    FavoriteBusiness: {
+      payload: Prisma.$FavoriteBusinessPayload<ExtArgs>
+      fields: Prisma.FavoriteBusinessFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FavoriteBusinessFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FavoriteBusinessFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>
+        }
+        findFirst: {
+          args: Prisma.FavoriteBusinessFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FavoriteBusinessFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>
+        }
+        findMany: {
+          args: Prisma.FavoriteBusinessFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>[]
+        }
+        create: {
+          args: Prisma.FavoriteBusinessCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>
+        }
+        createMany: {
+          args: Prisma.FavoriteBusinessCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FavoriteBusinessCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>[]
+        }
+        delete: {
+          args: Prisma.FavoriteBusinessDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>
+        }
+        update: {
+          args: Prisma.FavoriteBusinessUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>
+        }
+        deleteMany: {
+          args: Prisma.FavoriteBusinessDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FavoriteBusinessUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FavoriteBusinessUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>[]
+        }
+        upsert: {
+          args: Prisma.FavoriteBusinessUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FavoriteBusinessPayload>
+        }
+        aggregate: {
+          args: Prisma.FavoriteBusinessAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFavoriteBusiness>
+        }
+        groupBy: {
+          args: Prisma.FavoriteBusinessGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FavoriteBusinessGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FavoriteBusinessCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FavoriteBusinessCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -977,6 +1127,29 @@ export const LocationScalarFieldEnum = {
 } as const
 
 export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+export const DeviceTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  platform: 'platform',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeviceTokenScalarFieldEnum = (typeof DeviceTokenScalarFieldEnum)[keyof typeof DeviceTokenScalarFieldEnum]
+
+
+export const FavoriteBusinessScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  businessId: 'businessId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FavoriteBusinessScalarFieldEnum = (typeof FavoriteBusinessScalarFieldEnum)[keyof typeof FavoriteBusinessScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1192,6 +1365,8 @@ export type GlobalOmitConfig = {
   product?: Prisma.ProductOmit
   business?: Prisma.BusinessOmit
   location?: Prisma.LocationOmit
+  deviceToken?: Prisma.DeviceTokenOmit
+  favoriteBusiness?: Prisma.FavoriteBusinessOmit
 }
 
 /* Types for Logging */

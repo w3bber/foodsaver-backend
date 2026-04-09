@@ -47,3 +47,13 @@ export type Business = Prisma.BusinessModel
  * 
  */
 export type Location = Prisma.LocationModel
+/**
+ * Model DeviceToken
+ * 
+ */
+export type DeviceToken = Prisma.DeviceTokenModel
+/**
+ * Model FavoriteBusiness
+ * 
+ */
+export type FavoriteBusiness = Prisma.FavoriteBusinessModel

@@ -212,6 +212,8 @@ export type UserWhereInput = {
   imageUrl?: Prisma.StringNullableListFilter<"User">
   businesses?: Prisma.BusinessListRelationFilter
   orders?: Prisma.OrderListRelationFilter
+  deviceTokens?: Prisma.DeviceTokenListRelationFilter
+  favoriteBusinesses?: Prisma.FavoriteBusinessListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -226,6 +228,8 @@ export type UserOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrder
   businesses?: Prisma.BusinessOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
+  deviceTokens?: Prisma.DeviceTokenOrderByRelationAggregateInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -243,6 +247,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringNullableListFilter<"User">
   businesses?: Prisma.BusinessListRelationFilter
   orders?: Prisma.OrderListRelationFilter
+  deviceTokens?: Prisma.DeviceTokenListRelationFilter
+  favoriteBusinesses?: Prisma.FavoriteBusinessListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -287,6 +293,8 @@ export type UserCreateInput = {
   imageUrl?: Prisma.UserCreateimageUrlInput | string[]
   businesses?: Prisma.BusinessCreateNestedManyWithoutOwnerInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -301,6 +309,8 @@ export type UserUncheckedCreateInput = {
   imageUrl?: Prisma.UserCreateimageUrlInput | string[]
   businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutOwnerInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -315,6 +325,8 @@ export type UserUpdateInput = {
   imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
   businesses?: Prisma.BusinessUpdateManyWithoutOwnerNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -329,6 +341,8 @@ export type UserUncheckedUpdateInput = {
   imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
   businesses?: Prisma.BusinessUncheckedUpdateManyWithoutOwnerNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -463,6 +477,34 @@ export type UserUpdateOneRequiredWithoutBusinessesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBusinessesInput, Prisma.UserUpdateWithoutBusinessesInput>, Prisma.UserUncheckedUpdateWithoutBusinessesInput>
 }
 
+export type UserCreateNestedOneWithoutDeviceTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeviceTokensInput, Prisma.UserUncheckedCreateWithoutDeviceTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeviceTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDeviceTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeviceTokensInput, Prisma.UserUncheckedCreateWithoutDeviceTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeviceTokensInput
+  upsert?: Prisma.UserUpsertWithoutDeviceTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeviceTokensInput, Prisma.UserUpdateWithoutDeviceTokensInput>, Prisma.UserUncheckedUpdateWithoutDeviceTokensInput>
+}
+
+export type UserCreateNestedOneWithoutFavoriteBusinessesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoriteBusinessesInput, Prisma.UserUncheckedCreateWithoutFavoriteBusinessesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoriteBusinessesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFavoriteBusinessesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoriteBusinessesInput, Prisma.UserUncheckedCreateWithoutFavoriteBusinessesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoriteBusinessesInput
+  upsert?: Prisma.UserUpsertWithoutFavoriteBusinessesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFavoriteBusinessesInput, Prisma.UserUpdateWithoutFavoriteBusinessesInput>, Prisma.UserUncheckedUpdateWithoutFavoriteBusinessesInput>
+}
+
 export type UserCreateWithoutOrdersInput = {
   id?: string
   email: string
@@ -474,6 +516,8 @@ export type UserCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   imageUrl?: Prisma.UserCreateimageUrlInput | string[]
   businesses?: Prisma.BusinessCreateNestedManyWithoutOwnerInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -487,6 +531,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   imageUrl?: Prisma.UserCreateimageUrlInput | string[]
   businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutOwnerInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -516,6 +562,8 @@ export type UserUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
   businesses?: Prisma.BusinessUpdateManyWithoutOwnerNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -529,6 +577,8 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
   businesses?: Prisma.BusinessUncheckedUpdateManyWithoutOwnerNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBusinessesInput = {
@@ -542,6 +592,8 @@ export type UserCreateWithoutBusinessesInput = {
   updatedAt?: Date | string
   imageUrl?: Prisma.UserCreateimageUrlInput | string[]
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBusinessesInput = {
@@ -555,6 +607,8 @@ export type UserUncheckedCreateWithoutBusinessesInput = {
   updatedAt?: Date | string
   imageUrl?: Prisma.UserCreateimageUrlInput | string[]
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBusinessesInput = {
@@ -584,6 +638,8 @@ export type UserUpdateWithoutBusinessesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBusinessesInput = {
@@ -597,6 +653,160 @@ export type UserUncheckedUpdateWithoutBusinessesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDeviceTokensInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  firstName: string
+  lastName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: Prisma.UserCreateimageUrlInput | string[]
+  businesses?: Prisma.BusinessCreateNestedManyWithoutOwnerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDeviceTokensInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  firstName: string
+  lastName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: Prisma.UserCreateimageUrlInput | string[]
+  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutOwnerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDeviceTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeviceTokensInput, Prisma.UserUncheckedCreateWithoutDeviceTokensInput>
+}
+
+export type UserUpsertWithoutDeviceTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDeviceTokensInput, Prisma.UserUncheckedUpdateWithoutDeviceTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeviceTokensInput, Prisma.UserUncheckedCreateWithoutDeviceTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDeviceTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDeviceTokensInput, Prisma.UserUncheckedUpdateWithoutDeviceTokensInput>
+}
+
+export type UserUpdateWithoutDeviceTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
+  businesses?: Prisma.BusinessUpdateManyWithoutOwnerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDeviceTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
+  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutOwnerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFavoriteBusinessesInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  firstName: string
+  lastName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: Prisma.UserCreateimageUrlInput | string[]
+  businesses?: Prisma.BusinessCreateNestedManyWithoutOwnerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFavoriteBusinessesInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  firstName: string
+  lastName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: Prisma.UserCreateimageUrlInput | string[]
+  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutOwnerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFavoriteBusinessesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoriteBusinessesInput, Prisma.UserUncheckedCreateWithoutFavoriteBusinessesInput>
+}
+
+export type UserUpsertWithoutFavoriteBusinessesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFavoriteBusinessesInput, Prisma.UserUncheckedUpdateWithoutFavoriteBusinessesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoriteBusinessesInput, Prisma.UserUncheckedCreateWithoutFavoriteBusinessesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFavoriteBusinessesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFavoriteBusinessesInput, Prisma.UserUncheckedUpdateWithoutFavoriteBusinessesInput>
+}
+
+export type UserUpdateWithoutFavoriteBusinessesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
+  businesses?: Prisma.BusinessUpdateManyWithoutOwnerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFavoriteBusinessesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.UserUpdateimageUrlInput | string[]
+  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutOwnerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -607,11 +817,15 @@ export type UserUncheckedUpdateWithoutBusinessesInput = {
 export type UserCountOutputType = {
   businesses: number
   orders: number
+  deviceTokens: number
+  favoriteBusinesses: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   businesses?: boolean | UserCountOutputTypeCountBusinessesArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
+  deviceTokens?: boolean | UserCountOutputTypeCountDeviceTokensArgs
+  favoriteBusinesses?: boolean | UserCountOutputTypeCountFavoriteBusinessesArgs
 }
 
 /**
@@ -638,6 +852,20 @@ export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.OrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDeviceTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeviceTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFavoriteBusinessesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FavoriteBusinessWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -651,6 +879,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   imageUrl?: boolean
   businesses?: boolean | Prisma.User$businessesArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  deviceTokens?: boolean | Prisma.User$deviceTokensArgs<ExtArgs>
+  favoriteBusinesses?: boolean | Prisma.User$favoriteBusinessesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -694,6 +924,8 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   businesses?: boolean | Prisma.User$businessesArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  deviceTokens?: boolean | Prisma.User$deviceTokensArgs<ExtArgs>
+  favoriteBusinesses?: boolean | Prisma.User$favoriteBusinessesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -704,6 +936,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     businesses: Prisma.$BusinessPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
+    deviceTokens: Prisma.$DeviceTokenPayload<ExtArgs>[]
+    favoriteBusinesses: Prisma.$FavoriteBusinessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1111,6 +1345,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   businesses<T extends Prisma.User$businessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$businessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deviceTokens<T extends Prisma.User$deviceTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deviceTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeviceTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  favoriteBusinesses<T extends Prisma.User$favoriteBusinessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoriteBusinessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoriteBusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1582,6 +1818,54 @@ export type User$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * User.deviceTokens
+ */
+export type User$deviceTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeviceToken
+   */
+  select?: Prisma.DeviceTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DeviceToken
+   */
+  omit?: Prisma.DeviceTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeviceTokenInclude<ExtArgs> | null
+  where?: Prisma.DeviceTokenWhereInput
+  orderBy?: Prisma.DeviceTokenOrderByWithRelationInput | Prisma.DeviceTokenOrderByWithRelationInput[]
+  cursor?: Prisma.DeviceTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeviceTokenScalarFieldEnum | Prisma.DeviceTokenScalarFieldEnum[]
+}
+
+/**
+ * User.favoriteBusinesses
+ */
+export type User$favoriteBusinessesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FavoriteBusiness
+   */
+  select?: Prisma.FavoriteBusinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FavoriteBusiness
+   */
+  omit?: Prisma.FavoriteBusinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FavoriteBusinessInclude<ExtArgs> | null
+  where?: Prisma.FavoriteBusinessWhereInput
+  orderBy?: Prisma.FavoriteBusinessOrderByWithRelationInput | Prisma.FavoriteBusinessOrderByWithRelationInput[]
+  cursor?: Prisma.FavoriteBusinessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FavoriteBusinessScalarFieldEnum | Prisma.FavoriteBusinessScalarFieldEnum[]
 }
 
 /**
