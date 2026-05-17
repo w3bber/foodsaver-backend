@@ -1,4 +1,4 @@
-import { IsEnum, IsString, IsNumber, IsOptional, IsBoolean, IsDateString, IsArray } from "class-validator";
+import { IsEnum, IsString, IsNumber, IsOptional, IsBoolean, IsArray } from "class-validator";
 
 enum Category {
     FOOD = 'food',
@@ -26,9 +26,6 @@ export class CreateProductDto {
 
     @IsEnum(Category)
     category: Category;
-
-    @IsDateString()
-    expiryDate: Date;
 
     @IsString()
     businessId: string;

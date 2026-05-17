@@ -30,6 +30,8 @@ export type BusinessMinAggregateOutputType = {
   description: string | null
   ownerId: string | null
   locationId: string | null
+  pickupStartTime: string | null
+  pickupEndTime: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,6 +42,8 @@ export type BusinessMaxAggregateOutputType = {
   description: string | null
   ownerId: string | null
   locationId: string | null
+  pickupStartTime: string | null
+  pickupEndTime: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +54,8 @@ export type BusinessCountAggregateOutputType = {
   description: number
   ownerId: number
   locationId: number
+  pickupStartTime: number
+  pickupEndTime: number
   createdAt: number
   updatedAt: number
   imageUrl: number
@@ -63,6 +69,8 @@ export type BusinessMinAggregateInputType = {
   description?: true
   ownerId?: true
   locationId?: true
+  pickupStartTime?: true
+  pickupEndTime?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -73,6 +81,8 @@ export type BusinessMaxAggregateInputType = {
   description?: true
   ownerId?: true
   locationId?: true
+  pickupStartTime?: true
+  pickupEndTime?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -83,6 +93,8 @@ export type BusinessCountAggregateInputType = {
   description?: true
   ownerId?: true
   locationId?: true
+  pickupStartTime?: true
+  pickupEndTime?: true
   createdAt?: true
   updatedAt?: true
   imageUrl?: true
@@ -167,6 +179,8 @@ export type BusinessGroupByOutputType = {
   description: string | null
   ownerId: string
   locationId: string
+  pickupStartTime: string | null
+  pickupEndTime: string | null
   createdAt: Date
   updatedAt: Date
   imageUrl: string[]
@@ -199,6 +213,8 @@ export type BusinessWhereInput = {
   description?: Prisma.StringNullableFilter<"Business"> | string | null
   ownerId?: Prisma.StringFilter<"Business"> | string
   locationId?: Prisma.StringFilter<"Business"> | string
+  pickupStartTime?: Prisma.StringNullableFilter<"Business"> | string | null
+  pickupEndTime?: Prisma.StringNullableFilter<"Business"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   imageUrl?: Prisma.StringNullableListFilter<"Business">
@@ -207,6 +223,7 @@ export type BusinessWhereInput = {
   products?: Prisma.ProductListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   favoriteBusinesses?: Prisma.FavoriteBusinessListRelationFilter
+  carts?: Prisma.CartListRelationFilter
 }
 
 export type BusinessOrderByWithRelationInput = {
@@ -215,6 +232,8 @@ export type BusinessOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   locationId?: Prisma.SortOrder
+  pickupStartTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickupEndTime?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
@@ -223,6 +242,7 @@ export type BusinessOrderByWithRelationInput = {
   products?: Prisma.ProductOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   favoriteBusinesses?: Prisma.FavoriteBusinessOrderByRelationAggregateInput
+  carts?: Prisma.CartOrderByRelationAggregateInput
 }
 
 export type BusinessWhereUniqueInput = Prisma.AtLeast<{
@@ -234,6 +254,8 @@ export type BusinessWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Business"> | string | null
   ownerId?: Prisma.StringFilter<"Business"> | string
   locationId?: Prisma.StringFilter<"Business"> | string
+  pickupStartTime?: Prisma.StringNullableFilter<"Business"> | string | null
+  pickupEndTime?: Prisma.StringNullableFilter<"Business"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   imageUrl?: Prisma.StringNullableListFilter<"Business">
@@ -242,6 +264,7 @@ export type BusinessWhereUniqueInput = Prisma.AtLeast<{
   products?: Prisma.ProductListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   favoriteBusinesses?: Prisma.FavoriteBusinessListRelationFilter
+  carts?: Prisma.CartListRelationFilter
 }, "id">
 
 export type BusinessOrderByWithAggregationInput = {
@@ -250,6 +273,8 @@ export type BusinessOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   locationId?: Prisma.SortOrder
+  pickupStartTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickupEndTime?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
@@ -267,6 +292,8 @@ export type BusinessScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
   ownerId?: Prisma.StringWithAggregatesFilter<"Business"> | string
   locationId?: Prisma.StringWithAggregatesFilter<"Business"> | string
+  pickupStartTime?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  pickupEndTime?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Business"> | Date | string
   imageUrl?: Prisma.StringNullableListFilter<"Business">
@@ -276,6 +303,8 @@ export type BusinessCreateInput = {
   id?: string
   name: string
   description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -284,6 +313,7 @@ export type BusinessCreateInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateInput = {
@@ -292,18 +322,23 @@ export type BusinessUncheckedCreateInput = {
   description?: string | null
   ownerId: string
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -312,6 +347,7 @@ export type BusinessUpdateInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateInput = {
@@ -320,12 +356,15 @@ export type BusinessUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateManyInput = {
@@ -334,6 +373,8 @@ export type BusinessCreateManyInput = {
   description?: string | null
   ownerId: string
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -343,6 +384,8 @@ export type BusinessUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -354,6 +397,8 @@ export type BusinessUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -380,6 +425,8 @@ export type BusinessCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   locationId?: Prisma.SortOrder
+  pickupStartTime?: Prisma.SortOrder
+  pickupEndTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
@@ -391,6 +438,8 @@ export type BusinessMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   locationId?: Prisma.SortOrder
+  pickupStartTime?: Prisma.SortOrder
+  pickupEndTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -401,6 +450,8 @@ export type BusinessMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   locationId?: Prisma.SortOrder
+  pickupStartTime?: Prisma.SortOrder
+  pickupEndTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -488,6 +539,20 @@ export type BusinessUpdateimageUrlInput = {
   push?: string | string[]
 }
 
+export type BusinessCreateNestedOneWithoutCartsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCartsInput, Prisma.BusinessUncheckedCreateWithoutCartsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCartsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutCartsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCartsInput, Prisma.BusinessUncheckedCreateWithoutCartsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCartsInput
+  upsert?: Prisma.BusinessUpsertWithoutCartsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutCartsInput, Prisma.BusinessUpdateWithoutCartsInput>, Prisma.BusinessUncheckedUpdateWithoutCartsInput>
+}
+
 export type BusinessCreateNestedManyWithoutLocationInput = {
   create?: Prisma.XOR<Prisma.BusinessCreateWithoutLocationInput, Prisma.BusinessUncheckedCreateWithoutLocationInput> | Prisma.BusinessCreateWithoutLocationInput[] | Prisma.BusinessUncheckedCreateWithoutLocationInput[]
   connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutLocationInput | Prisma.BusinessCreateOrConnectWithoutLocationInput[]
@@ -548,6 +613,8 @@ export type BusinessCreateWithoutOwnerInput = {
   id?: string
   name: string
   description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -555,6 +622,7 @@ export type BusinessCreateWithoutOwnerInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutOwnerInput = {
@@ -562,12 +630,15 @@ export type BusinessUncheckedCreateWithoutOwnerInput = {
   name: string
   description?: string | null
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutOwnerInput = {
@@ -605,6 +676,8 @@ export type BusinessScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Business"> | string | null
   ownerId?: Prisma.StringFilter<"Business"> | string
   locationId?: Prisma.StringFilter<"Business"> | string
+  pickupStartTime?: Prisma.StringNullableFilter<"Business"> | string | null
+  pickupEndTime?: Prisma.StringNullableFilter<"Business"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   imageUrl?: Prisma.StringNullableListFilter<"Business">
@@ -614,6 +687,8 @@ export type BusinessCreateWithoutOrdersInput = {
   id?: string
   name: string
   description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -621,6 +696,7 @@ export type BusinessCreateWithoutOrdersInput = {
   owner: Prisma.UserCreateNestedOneWithoutBusinessesInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutOrdersInput = {
@@ -629,11 +705,14 @@ export type BusinessUncheckedCreateWithoutOrdersInput = {
   description?: string | null
   ownerId: string
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutOrdersInput = {
@@ -656,6 +735,8 @@ export type BusinessUpdateWithoutOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -663,6 +744,7 @@ export type BusinessUpdateWithoutOrdersInput = {
   owner?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutOrdersInput = {
@@ -671,17 +753,22 @@ export type BusinessUncheckedUpdateWithoutOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutProductsInput = {
   id?: string
   name: string
   description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -689,6 +776,7 @@ export type BusinessCreateWithoutProductsInput = {
   owner: Prisma.UserCreateNestedOneWithoutBusinessesInput
   orders?: Prisma.OrderCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutProductsInput = {
@@ -697,11 +785,14 @@ export type BusinessUncheckedCreateWithoutProductsInput = {
   description?: string | null
   ownerId: string
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutProductsInput = {
@@ -724,6 +815,8 @@ export type BusinessUpdateWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -731,6 +824,7 @@ export type BusinessUpdateWithoutProductsInput = {
   owner?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
   orders?: Prisma.OrderUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutProductsInput = {
@@ -739,9 +833,92 @@ export type BusinessUncheckedUpdateWithoutProductsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBusinessNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutCartsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
+  location: Prisma.LocationCreateNestedOneWithoutBusinessesInput
+  owner: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBusinessInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutCartsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ownerId: string
+  locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBusinessInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutCartsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCartsInput, Prisma.BusinessUncheckedCreateWithoutCartsInput>
+}
+
+export type BusinessUpsertWithoutCartsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutCartsInput, Prisma.BusinessUncheckedUpdateWithoutCartsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCartsInput, Prisma.BusinessUncheckedCreateWithoutCartsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutCartsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutCartsInput, Prisma.BusinessUncheckedUpdateWithoutCartsInput>
+}
+
+export type BusinessUpdateWithoutCartsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
+  location?: Prisma.LocationUpdateOneRequiredWithoutBusinessesNestedInput
+  owner?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBusinessNestedInput
+  favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutCartsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutBusinessNestedInput
 }
@@ -750,6 +927,8 @@ export type BusinessCreateWithoutLocationInput = {
   id?: string
   name: string
   description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -757,6 +936,7 @@ export type BusinessCreateWithoutLocationInput = {
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutLocationInput = {
@@ -764,12 +944,15 @@ export type BusinessUncheckedCreateWithoutLocationInput = {
   name: string
   description?: string | null
   ownerId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBusinessInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutLocationInput = {
@@ -802,6 +985,8 @@ export type BusinessCreateWithoutFavoriteBusinessesInput = {
   id?: string
   name: string
   description?: string | null
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -809,6 +994,7 @@ export type BusinessCreateWithoutFavoriteBusinessesInput = {
   owner: Prisma.UserCreateNestedOneWithoutBusinessesInput
   products?: Prisma.ProductCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutFavoriteBusinessesInput = {
@@ -817,11 +1003,14 @@ export type BusinessUncheckedCreateWithoutFavoriteBusinessesInput = {
   description?: string | null
   ownerId: string
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBusinessInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBusinessInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutFavoriteBusinessesInput = {
@@ -844,6 +1033,8 @@ export type BusinessUpdateWithoutFavoriteBusinessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -851,6 +1042,7 @@ export type BusinessUpdateWithoutFavoriteBusinessesInput = {
   owner?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutFavoriteBusinessesInput = {
@@ -859,11 +1051,14 @@ export type BusinessUncheckedUpdateWithoutFavoriteBusinessesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateManyOwnerInput = {
@@ -871,6 +1066,8 @@ export type BusinessCreateManyOwnerInput = {
   name: string
   description?: string | null
   locationId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -880,6 +1077,8 @@ export type BusinessUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -887,6 +1086,7 @@ export type BusinessUpdateWithoutOwnerInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutOwnerInput = {
@@ -894,12 +1094,15 @@ export type BusinessUncheckedUpdateWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateManyWithoutOwnerInput = {
@@ -907,6 +1110,8 @@ export type BusinessUncheckedUpdateManyWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -917,6 +1122,8 @@ export type BusinessCreateManyLocationInput = {
   name: string
   description?: string | null
   ownerId: string
+  pickupStartTime?: string | null
+  pickupEndTime?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   imageUrl?: Prisma.BusinessCreateimageUrlInput | string[]
@@ -926,6 +1133,8 @@ export type BusinessUpdateWithoutLocationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -933,6 +1142,7 @@ export type BusinessUpdateWithoutLocationInput = {
   products?: Prisma.ProductUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutLocationInput = {
@@ -940,12 +1150,15 @@ export type BusinessUncheckedUpdateWithoutLocationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
   products?: Prisma.ProductUncheckedUpdateManyWithoutBusinessNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutBusinessNestedInput
   favoriteBusinesses?: Prisma.FavoriteBusinessUncheckedUpdateManyWithoutBusinessNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateManyWithoutLocationInput = {
@@ -953,6 +1166,8 @@ export type BusinessUncheckedUpdateManyWithoutLocationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupStartTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickupEndTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   imageUrl?: Prisma.BusinessUpdateimageUrlInput | string[]
@@ -967,12 +1182,14 @@ export type BusinessCountOutputType = {
   products: number
   orders: number
   favoriteBusinesses: number
+  carts: number
 }
 
 export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | BusinessCountOutputTypeCountProductsArgs
   orders?: boolean | BusinessCountOutputTypeCountOrdersArgs
   favoriteBusinesses?: boolean | BusinessCountOutputTypeCountFavoriteBusinessesArgs
+  carts?: boolean | BusinessCountOutputTypeCountCartsArgs
 }
 
 /**
@@ -1006,6 +1223,13 @@ export type BusinessCountOutputTypeCountFavoriteBusinessesArgs<ExtArgs extends r
   where?: Prisma.FavoriteBusinessWhereInput
 }
 
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountCartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CartWhereInput
+}
+
 
 export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1013,6 +1237,8 @@ export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   description?: boolean
   ownerId?: boolean
   locationId?: boolean
+  pickupStartTime?: boolean
+  pickupEndTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageUrl?: boolean
@@ -1021,6 +1247,7 @@ export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   products?: boolean | Prisma.Business$productsArgs<ExtArgs>
   orders?: boolean | Prisma.Business$ordersArgs<ExtArgs>
   favoriteBusinesses?: boolean | Prisma.Business$favoriteBusinessesArgs<ExtArgs>
+  carts?: boolean | Prisma.Business$cartsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["business"]>
 
@@ -1030,6 +1257,8 @@ export type BusinessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   description?: boolean
   ownerId?: boolean
   locationId?: boolean
+  pickupStartTime?: boolean
+  pickupEndTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageUrl?: boolean
@@ -1043,6 +1272,8 @@ export type BusinessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   description?: boolean
   ownerId?: boolean
   locationId?: boolean
+  pickupStartTime?: boolean
+  pickupEndTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageUrl?: boolean
@@ -1056,18 +1287,21 @@ export type BusinessSelectScalar = {
   description?: boolean
   ownerId?: boolean
   locationId?: boolean
+  pickupStartTime?: boolean
+  pickupEndTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   imageUrl?: boolean
 }
 
-export type BusinessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "ownerId" | "locationId" | "createdAt" | "updatedAt" | "imageUrl", ExtArgs["result"]["business"]>
+export type BusinessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "ownerId" | "locationId" | "pickupStartTime" | "pickupEndTime" | "createdAt" | "updatedAt" | "imageUrl", ExtArgs["result"]["business"]>
 export type BusinessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   location?: boolean | Prisma.LocationDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Business$productsArgs<ExtArgs>
   orders?: boolean | Prisma.Business$ordersArgs<ExtArgs>
   favoriteBusinesses?: boolean | Prisma.Business$favoriteBusinessesArgs<ExtArgs>
+  carts?: boolean | Prisma.Business$cartsArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1087,6 +1321,7 @@ export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     products: Prisma.$ProductPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     favoriteBusinesses: Prisma.$FavoriteBusinessPayload<ExtArgs>[]
+    carts: Prisma.$CartPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1094,6 +1329,8 @@ export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     description: string | null
     ownerId: string
     locationId: string
+    pickupStartTime: string | null
+    pickupEndTime: string | null
     createdAt: Date
     updatedAt: Date
     imageUrl: string[]
@@ -1496,6 +1733,7 @@ export interface Prisma__BusinessClient<T, Null = never, ExtArgs extends runtime
   products<T extends Prisma.Business$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.Business$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   favoriteBusinesses<T extends Prisma.Business$favoriteBusinessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$favoriteBusinessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoriteBusinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  carts<T extends Prisma.Business$cartsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$cartsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1530,6 +1768,8 @@ export interface BusinessFieldRefs {
   readonly description: Prisma.FieldRef<"Business", 'String'>
   readonly ownerId: Prisma.FieldRef<"Business", 'String'>
   readonly locationId: Prisma.FieldRef<"Business", 'String'>
+  readonly pickupStartTime: Prisma.FieldRef<"Business", 'String'>
+  readonly pickupEndTime: Prisma.FieldRef<"Business", 'String'>
   readonly createdAt: Prisma.FieldRef<"Business", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Business", 'DateTime'>
   readonly imageUrl: Prisma.FieldRef<"Business", 'String[]'>
@@ -1998,6 +2238,30 @@ export type Business$favoriteBusinessesArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.FavoriteBusinessScalarFieldEnum | Prisma.FavoriteBusinessScalarFieldEnum[]
+}
+
+/**
+ * Business.carts
+ */
+export type Business$cartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cart
+   */
+  select?: Prisma.CartSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cart
+   */
+  omit?: Prisma.CartOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CartInclude<ExtArgs> | null
+  where?: Prisma.CartWhereInput
+  orderBy?: Prisma.CartOrderByWithRelationInput | Prisma.CartOrderByWithRelationInput[]
+  cursor?: Prisma.CartWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CartScalarFieldEnum | Prisma.CartScalarFieldEnum[]
 }
 
 /**

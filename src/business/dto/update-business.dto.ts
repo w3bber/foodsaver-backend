@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsOptional, IsString, Matches } from "class-validator";
 
 export class UpdateBusinessDto {
     @IsString()
@@ -12,4 +12,14 @@ export class UpdateBusinessDto {
     @IsString()
     @IsOptional()
     locationId?: string;
+
+    @IsOptional()
+    @IsString()
+    @Matches(/^([01]\d|2[0-3]):[0-5]\d$/)
+    pickupStartTime?: string;
+
+    @IsOptional()
+    @IsString()
+    @Matches(/^([01]\d|2[0-3]):[0-5]\d$/)
+    pickupEndTime?: string;
 }

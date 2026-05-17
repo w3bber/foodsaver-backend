@@ -1,9 +1,10 @@
-import { Injectable, BadRequestException } from "@nestjs/common";
+import { Injectable, BadRequestException, UnauthorizedException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { JwtService } from "@nestjs/jwt";
 import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
 import { Role } from "src/generated/prisma/enums";
+import type { StringValue } from "ms";
 
 
 @Injectable()
@@ -42,8 +43,40 @@ export class AuthService {
 
     private generateToken(user: any) {
         const payload = { sub: user.id, email: user.email, role: user.role };
+        const accessExpiresIn = (process.env.JWT_ACCESS_EXPIRES_IN || '15m') as StringValue;
+        const refreshExpiresIn = (process.env.JWT_REFRESH_EXPIRES_IN || '30d') as StringValue;
+
         return {
-            access_token: this.jwtService.sign(payload),
+            access_token: this.jwtService.sign(payload, {
+                expiresIn: accessExpiresIn,
+            }),
+            refresh_token: this.jwtService.sign(payload, {
+                secret: process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET || 'defaultRefreshSecret',
+                expiresIn: refreshExpiresIn,
+            }),
         }
+    }
+
+    async refreshAccessToken(refreshToken: string) {
+        if (!refreshToken) {
+            throw new UnauthorizedException('Refresh token is required');
+        }
+
+        let payload: any;
+        try {
+            payload = await this.jwtService.verifyAsync(refreshToken, {
+                secret: process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET || 'defaultRefreshSecret',
+            });
+        } catch {
+            throw new UnauthorizedException('Invalid refresh token');
+        }
+
+        const userId = payload.sub;
+        const user = await this.prisma.user.findUnique({ where: { id: userId } });
+        if (!user) {
+            throw new UnauthorizedException('User not found');
+        }
+
+        return this.generateToken(user);
     }
 }

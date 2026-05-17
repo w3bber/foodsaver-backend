@@ -23,6 +23,7 @@ model User {
   imageUrl   String[]    @map("image_url")
   deviceTokens DeviceToken[] 
   favoriteBusinesses FavoriteBusiness[]
+  carts      Cart[]
 
   @@map("users")
   
@@ -61,7 +62,6 @@ model Product {
   description String
   price       Float
   category    String
-  expiryDate  DateTime    @map("expiry_date")
   quantity    Int
   isActive    Boolean     @default(true) @map("is_active")
   businessId  String      @map("business_id")
@@ -70,6 +70,7 @@ model Product {
   orderItems  OrderItem[]
   business    Business    @relation(fields: [businessId], references: [id])
   imageUrl    String[]     @map("image_url")
+  cartItems   CartItem[]
 
   @@map("products")
 }
@@ -80,6 +81,8 @@ model Business {
   description String?
   ownerId     String    @map("owner_id")
   locationId  String
+  pickupStartTime String? @map("pickup_start_time")
+  pickupEndTime   String? @map("pickup_end_time")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
   location    Location  @relation(fields: [locationId], references: [id])
@@ -88,8 +91,37 @@ model Business {
   imageUrl    String[]   @map("image_url")
   orders     Order[]
   favoriteBusinesses FavoriteBusiness[]
+  carts      Cart[]
 
   @@map("businesses")
+}
+
+model Cart {
+  id         String     @id @default(cuid())
+  userId     String     @map("user_id")
+  businessId String     @map("business_id")
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business   Business   @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  items      CartItem[]
+
+  @@unique([userId, businessId])
+  @@map("carts")
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String   @map("cart_id")
+  productId String   @map("product_id")
+  quantity  Int
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
 }
 
 model Location {

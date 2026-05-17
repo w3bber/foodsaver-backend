@@ -8,19 +8,20 @@ import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 import { NotificationModule } from './notification/notification.module';
 import { FavoriteModule } from './favorite/favorite.module';
-
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
-    PrismaModule, 
-    AuthModule, 
-    UserModule, 
-    BusinessModule, 
-    LocationModule, 
+    PrismaModule,
+    AuthModule,
+    UserModule,
+    BusinessModule,
+    LocationModule,
     ProductModule,
     OrderModule,
     NotificationModule,
-    FavoriteModule
+    FavoriteModule,
+    CartModule,
   ],
 })
 export class AppModule {}

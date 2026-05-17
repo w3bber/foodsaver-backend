@@ -54,6 +54,8 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   Product: 'Product',
   Business: 'Business',
+  Cart: 'Cart',
+  CartItem: 'CartItem',
   Location: 'Location',
   DeviceToken: 'DeviceToken',
   FavoriteBusiness: 'FavoriteBusiness'
@@ -120,7 +122,6 @@ export const ProductScalarFieldEnum = {
   description: 'description',
   price: 'price',
   category: 'category',
-  expiryDate: 'expiryDate',
   quantity: 'quantity',
   isActive: 'isActive',
   businessId: 'businessId',
@@ -138,12 +139,37 @@ export const BusinessScalarFieldEnum = {
   description: 'description',
   ownerId: 'ownerId',
   locationId: 'locationId',
+  pickupStartTime: 'pickupStartTime',
+  pickupEndTime: 'pickupEndTime',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   imageUrl: 'imageUrl'
 } as const
 
 export type BusinessScalarFieldEnum = (typeof BusinessScalarFieldEnum)[keyof typeof BusinessScalarFieldEnum]
+
+
+export const CartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  businessId: 'businessId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CartScalarFieldEnum = (typeof CartScalarFieldEnum)[keyof typeof CartScalarFieldEnum]
+
+
+export const CartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  productId: 'productId',
+  quantity: 'quantity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CartItemScalarFieldEnum = (typeof CartItemScalarFieldEnum)[keyof typeof CartItemScalarFieldEnum]
 
 
 export const LocationScalarFieldEnum = {

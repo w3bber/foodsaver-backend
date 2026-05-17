@@ -19,13 +19,13 @@ export class ProductController {
     ) {}
 
     @Post()
-    async createProduct(@Body() dto: CreateProductDto) {
+    async createProduct(@Body() dto: CreateProductDto, @CurrentUser() user: User) {
         const business = await this.prisma.business.findUnique({
             where: { id: dto.businessId },
         });
 
-        if (!business) {
-            throw new ForbiddenException('business not found');
+        if (!business || business.ownerId !== user.id) {
+            throw new ForbiddenException('access denied');
         }
 
         return this.productService.createProduct(dto);
@@ -42,16 +42,12 @@ export class ProductController {
         @Query('isActive') isActive?: boolean,
         @Query('businessId') businessId?: string,
         @Query('locationId') locationId?: string,
-        @Query('minExpiryDate') minExpiryDate?: Date,
-        @Query('maxExpiryDate') maxExpiryDate?: Date,
     ) {
         return this.productService.getProducts({
             category,
             isActive: isActive ? isActive === true : undefined,
             businessId,
             locationId,
-            minExpiryDate: minExpiryDate ? new Date(minExpiryDate) : undefined,
-            maxExpiryDate: maxExpiryDate ? new Date(maxExpiryDate) : undefined,
         });
     }
 

@@ -9,6 +9,5 @@ export class CreateLocationDto {
 
     @IsString()
     address: string;
-
 }
 

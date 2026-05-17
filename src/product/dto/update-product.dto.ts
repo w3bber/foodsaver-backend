@@ -1,4 +1,4 @@
-import { IsEnum, IsString, IsDateString, IsNumber, IsOptional, IsBoolean } from "class-validator";
+import { IsEnum, IsString, IsNumber, IsOptional, IsBoolean, IsArray } from "class-validator";
 
 enum Category {
     FOOD = 'food',
@@ -33,10 +33,7 @@ export class UpdateProductDto {
     category?: Category;
 
     @IsOptional()
-    @IsDateString()
-    expiryDate?: Date;
-
-    @IsOptional()
-    @IsString()
-    imgUrls?: string[];
+    @IsArray()
+    @IsString({ each: true })
+    imageUrl?: string[];
 }

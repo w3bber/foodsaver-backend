@@ -24,6 +24,9 @@ export class BusinessService {
                 description: dto.description,
                 ownerId: userId,
                 locationId: dto.locationId,
+                pickupStartTime: dto.pickupStartTime,
+                pickupEndTime: dto.pickupEndTime,
+                imageUrl: dto.imageUrls ?? []
             },
         });
     }
@@ -50,7 +53,6 @@ export class BusinessService {
                         price: true,
                         quantity: true,
                         isActive: true,
-                        expiryDate: true,
                         imageUrl: true,
                     }
                 }
@@ -77,7 +79,6 @@ export class BusinessService {
                         price: true,
                         quantity: true,
                         isActive: true,
-                        expiryDate: true,
                     }
                 }
             }
@@ -90,6 +91,8 @@ export class BusinessService {
                 id: true,
                 name: true,
                 description: true,
+                pickupStartTime: true,
+                pickupEndTime: true,
                 imageUrl: true,
                 location: {
                     select: {

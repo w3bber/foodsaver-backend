@@ -41,13 +41,8 @@ export class ProductService {
         isActive?: boolean;
         businessId?: string;
         locationId?: string;
-        minExpiryDate?: Date;
-        maxExpiryDate?: Date;
     }) {
-        const {category, isActive, businessId, locationId, minExpiryDate, maxExpiryDate} = filters || {};
-
-        console.log('minExpiryDate:', minExpiryDate, 'isValid:', (minExpiryDate?.getDate()));
-        console.log('maxExpiryDate:', maxExpiryDate, 'isValid:', (maxExpiryDate?.getDate()));
+        const {category, isActive, businessId, locationId} = filters || {};
 
         return this.prismaService.product.findMany({
             where: {
@@ -59,12 +54,6 @@ export class ProductService {
                         locationId: locationId,
                     },
                 }),
-                ...(minExpiryDate || maxExpiryDate ? {
-                    expiryDate: {
-                        ...(minExpiryDate && {gte: minExpiryDate}),
-                        ...(maxExpiryDate && {lte: maxExpiryDate}),
-                    }
-                } : {}),
             },
             include: {
                 business: {
@@ -73,7 +62,7 @@ export class ProductService {
                     }
                 }
             },
-            orderBy: { expiryDate: 'asc' },
+            orderBy: { createdAt: 'desc' },
         });
     }
 

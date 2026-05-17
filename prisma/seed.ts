@@ -1,12 +1,25 @@
-import { PrismaClient } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import 'dotenv/config';
+import { PrismaClient } from '../src/generated/prisma/client';
 
 const prisma = new PrismaClient();
 
-async function main() {
-  console.log('🌱 Starting database seed...\n');
+const password = 'password123';
 
-  // Clean up existing data (только для разработки!)
+const coverImages = [
+  'https://fra.cloud.appwrite.io/v1/storage/buckets/69725afe001897636f4a/files/6a09aa37001eb1c1283f/view?project=6972581d002dc8c7cecb&mode=admin',
+  'https://fra.cloud.appwrite.io/v1/storage/buckets/69725afe001897636f4a/files/6a09aa37001ebfc0e3d6/view?project=6972581d002dc8c7cecb&mode=admin',
+];
+
+const productImages = [
+  'https://fra.cloud.appwrite.io/v1/storage/buckets/69725afe001897636f4a/files/6a09ad710010cf79ebf3/view?project=6972581d002dc8c7cecb&mode=admin',
+  'https://fra.cloud.appwrite.io/v1/storage/buckets/69725afe001897636f4a/files/6a09ad710010c49905b4/view?project=6972581d002dc8c7cecb&mode=admin',
+  'https://fra.cloud.appwrite.io/v1/storage/buckets/69725afe001897636f4a/files/6a09ad710010c282fa29/view?project=6972581d002dc8c7cecb&mode=admin',
+  'https://fra.cloud.appwrite.io/v1/storage/buckets/69725afe001897636f4a/files/6a09ad710010cc997361/view?project=6972581d002dc8c7cecb&mode=admin',
+];
+
+async function clearDatabase() {
+  await prisma.cartItem.deleteMany();
+  await prisma.cart.deleteMany();
   await prisma.favoriteBusiness.deleteMany();
   await prisma.deviceToken.deleteMany();
   await prisma.orderItem.deleteMany();
@@ -15,124 +28,164 @@ async function main() {
   await prisma.business.deleteMany();
   await prisma.location.deleteMany();
   await prisma.user.deleteMany();
+}
 
-  console.log('✓ Cleaned existing data\n');
+async function main() {
+  console.log('Starting database seed...');
 
-  // Создаем локации
-  const location1 = await prisma.location.create({
-    data: {
-      lat: 55.7558,
-      lng: 37.6173,
-      address: 'Москва, Красная площадь, 1',
-    },
-  });
+  await clearDatabase();
+  console.log('Cleaned existing data');
 
-  console.log('✓ Created locations\n');
+  const [locationBakery, locationCafe] = await Promise.all([
+    prisma.location.create({
+      data: {
+        lat: 58.583322,
+        lng: 49.576227,
+        address: 'Киров, ул. Валерия Зянкина, 12',
+      },
+    }),
+    prisma.location.create({
+      data: {
+        lat: 58.579962,
+        lng: 49.576227,
+        address: 'Киров, ул. Дмитрий Козуелва, 2',
+      },
+    }),
+  ]);
 
-  // Хешируем пароли
-  const hashedPassword = await bcrypt.hash('password123', 10);
-
-  // 1️⃣ АДМИН
   const admin = await prisma.user.create({
     data: {
       email: 'admin@example.com',
-      password: hashedPassword,
+      password,
       role: 'ADMIN',
       firstName: 'Admin',
       lastName: 'User',
       imageUrl: [],
     },
   });
-  console.log(`✓ Created ADMIN: ${admin.email}`);
 
-  // 2️⃣ БИЗНЕС ВЛАДЕЛЕЦ (Business Owner)
   const businessOwner = await prisma.user.create({
     data: {
       email: 'business@example.com',
-      password: hashedPassword,
+      password,
       role: 'BUSINESS',
       firstName: 'Иван',
       lastName: 'Владелец',
       imageUrl: [],
     },
   });
-  console.log(`✓ Created BUSINESS owner: ${businessOwner.email}`);
 
-  // 3️⃣ ОБЫЧНЫЙ ПОЛЬЗОВАТЕЛЬ (Regular User)
+  const secondBusinessOwner = await prisma.user.create({
+    data: {
+      email: 'business2@example.com',
+      password,
+      role: 'BUSINESS',
+      firstName: 'Анна',
+      lastName: 'Пекарь',
+      imageUrl: [],
+    },
+  });
+
   const regularUser = await prisma.user.create({
     data: {
       email: 'user@example.com',
-      password: hashedPassword,
+      password,
       role: 'USER',
       firstName: 'Петр',
       lastName: 'Клиент',
       imageUrl: [],
     },
   });
-  console.log(`✓ Created USER: ${regularUser.email}\n`);
 
-  // Создаем бизнес для владельца
-  const business = await prisma.business.create({
+  const bakery = await prisma.business.create({
     data: {
-      name: 'Эко-Кафе "Зеленый лист"',
-      description: 'Кафе с акцентом на переработку и спасение продуктов',
+      name: 'Пекарня "Хлебница"',
+      description: 'Свежая выпечка со скидкой в конце дня',
       ownerId: businessOwner.id,
-      locationId: location1.id,
-      imageUrl: [],
+      locationId: locationBakery.id,
+      pickupStartTime: '19:00',
+      pickupEndTime: '21:00',
+      imageUrl: [coverImages[0]],
     },
   });
-  console.log(`✓ Created business: ${business.name}\n`);
 
-  // Создаем товары (со скидкой - они близки к сроку)
-  const product1 = await prisma.product.create({
+  const cafe = await prisma.business.create({
+    data: {
+      name: 'Пекарня "Бублик"',
+      description: 'Свежая выпечка со скидкой в конце дня',
+      ownerId: secondBusinessOwner.id,
+      locationId: locationCafe.id,
+      pickupStartTime: '18:30',
+      pickupEndTime: '20:30',
+      imageUrl: [coverImages[1]],
+    },
+  });
+
+  const buns = await prisma.product.create({
     data: {
       name: 'Свежие булочки',
-      description: 'Булочки, сделанные утром. Экономия 40%',
+      description: 'Булочки, приготовленные утром. Скидка 40%.',
       price: 30,
       category: 'bakery',
-      expiryDate: new Date(Date.now() + 2 * 60 * 60 * 1000), // на 2 часа позже
       quantity: 15,
       isActive: true,
-      businessId: business.id,
-      imageUrl: [],
+      businessId: bakery.id,
+      imageUrl: [productImages[0]],
     },
   });
 
-  const product2 = await prisma.product.create({
+  const croissant = await prisma.product.create({
     data: {
-      name: 'Овощной салат',
-      description: 'Свежий салат. Срок действительности 3 часа. Скидка 50%',
+      name: 'Круассан с миндалем',
+      description: 'Осталось несколько круассанов из дневной партии.',
+      price: 85,
+      category: 'bakery',
+      quantity: 6,
+      isActive: true,
+      businessId: bakery.id,
+      imageUrl: [productImages[2]],
+    },
+  });
+
+  const pizza = await prisma.product.create({
+    data: {
+      name: 'Пицца школьная',
+      description: 'Пицца со скидкой 50%.',
       price: 60,
       category: 'food',
-      expiryDate: new Date(Date.now() + 3 * 60 * 60 * 1000),
       quantity: 8,
       isActive: true,
-      businessId: business.id,
-      imageUrl: [],
+      businessId: cafe.id,
+      imageUrl: [productImages[1]],
     },
   });
 
-  console.log('✓ Created products\n');
-
-  // Добавляем бизнес в избранное у обычного пользователя
-  await prisma.favoriteBusiness.create({
+  const rybnik = await prisma.product.create({
     data: {
-      userId: regularUser.id,
-      businessId: business.id,
+      name: 'Рыбник',
+      description: 'Рыбник со скидкой.',
+      price: 60,
+      category: 'bakery',
+      quantity: 10,
+      isActive: false,
+      businessId: cafe.id,
+      imageUrl: [productImages[3]],
     },
   });
-  console.log('✓ Added business to favorites\n');
 
-  console.log('✅ Seed completed successfully!');
-  console.log('\n📝 Test credentials:');
-  console.log('   Admin:    admin@example.com / password123');
-  console.log('   Business: business@example.com / password123');
-  console.log('   User:     user@example.com / password123');
+  console.log('Created users, locations, businesses and products');
+  console.log('Seed completed successfully');
+  console.log('');
+  console.log('Test credentials:');
+  console.log(`Admin:     ${admin.email} / ${password}`);
+  console.log(`Business:  ${businessOwner.email} / ${password}`);
+  console.log(`Business2: ${secondBusinessOwner.email} / ${password}`);
+  console.log(`User:      ${regularUser.email} / ${password}`);
 }
 
 main()
-  .catch((e) => {
-    console.error('❌ Seed error:', e);
+  .catch((error) => {
+    console.error('Seed error:', error);
     process.exit(1);
   })
   .finally(async () => {
