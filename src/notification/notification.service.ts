@@ -41,6 +41,7 @@ export class NotificationService {
                 },
                 data: {
                     type: NotificationType.NEW_ORDER,
+                    screen: 'orders',
                     orderId: order.id,
                     businessId: order.businessId,
                 }, 
@@ -80,6 +81,7 @@ export class NotificationService {
                 },
                 data: {
                     type: NotificationType.ORDER_COMPLETED,
+                    screen: 'orders',
                     orderId: order.id,
                     businessId: order.businessId,
                 },
@@ -132,6 +134,7 @@ export class NotificationService {
                 },
                 data: {
                     type: NotificationType.PRODUCT_RESTOCK,
+                    screen: 'store',
                     businessId,
                 },
                 tokens: tokens,

@@ -11,6 +11,8 @@ export interface NotificationPayload {
   };
   data: {
     type: NotificationType;
+    screen?: string;
+    route?: string;
     orderId?: string;
     businessId?: string;
     productId?: string;
