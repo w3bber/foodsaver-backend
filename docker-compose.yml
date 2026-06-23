@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:
@@ -12,11 +10,11 @@ services:
       POSTGRES_USER: ${DB_USER:-foodsaver_user}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-foodsaver_pass}
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-foodsaver_user}"]
+      test: ["CMD-SHELL", "pg_isready -p 5432 -U ${DB_USER:-foodsaver_user} -d ${DB_NAME:-foodsaver}"]
       interval: 10s
       timeout: 5s
       retries: 5

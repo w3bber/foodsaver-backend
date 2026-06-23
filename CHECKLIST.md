@@ -10,7 +10,7 @@
 - [ ] Установили [Docker Desktop](https://www.docker.com/products/docker-desktop)
   ```bash
   docker --version
-  docker-compose --version
+  docker compose version
   ```
 - [ ] Установили [Git](https://git-scm.com/download/win)
   ```bash
@@ -59,9 +59,8 @@
   
   ✅ **По умолчанию в .env должно быть:**
   ```
-  DATABASE_URL="postgresql://foodwaste_user:foodwaste_pass@localhost:5432/foodwaste"
+  DATABASE_URL="postgresql://foodsaver_user:foodsaver_pass@localhost:5432/foodsaver"
   JWT_SECRET="ВАШ_СЛОЖНЫЙ_СЕКРЕТ_ЗДЕСЬ_32_И_БОЛЕЕ_СИМВОЛОВ"
-  JWT_EXPIRY="7d"
   PORT=3000
   NODE_ENV="development"
   ```
@@ -89,23 +88,23 @@
 
 - [ ] Запустили контейнер PostgreSQL:
   ```bash
-  docker-compose up -d
+  docker compose --env-file .env.docker up -d
   ```
 
 - [ ] Проверили статус:
   ```bash
-  docker-compose ps
+  docker compose --env-file .env.docker ps
   ```
   
   ✅ Должно вывести:
   ```
   NAME          STATUS
-  foodwaste-db  Up 2 seconds
+  foodsaver-db  Up
   ```
 
 - [ ] Проверили подключение к БД:
   ```bash
-  docker-compose exec postgres psql -U foodwaste_user -d foodwaste -c "SELECT 1"
+  docker compose --env-file .env.docker exec postgres psql -U foodsaver_user -d foodsaver -c "SELECT 1"
   ```
   ✅ Должно вывести: `1`
 
@@ -114,13 +113,13 @@
 - [ ] Установили PostgreSQL (если ещё не установили)
 - [ ] Создали БД:
   ```bash
-  createdb -U postgres foodwaste
+  createdb -U postgres foodsaver
   ```
 - [ ] Создали юзера:
   ```bash
   psql -U postgres
-  CREATE USER foodwaste_user WITH PASSWORD 'foodwaste_pass';
-  GRANT ALL PRIVILEGES ON DATABASE foodwaste TO foodwaste_user;
+  CREATE USER foodsaver_user WITH PASSWORD 'foodsaver_pass';
+  GRANT ALL PRIVILEGES ON DATABASE foodsaver TO foodsaver_user;
   \q
   ```
 
@@ -142,7 +141,7 @@
 
 - [ ] Проверили, что таблицы созданы:
   ```bash
-  docker-compose exec postgres psql -U foodwaste_user -d foodwaste -c "\dt"
+  docker compose --env-file .env.docker exec postgres psql -U foodsaver_user -d foodsaver -c "\dt"
   ```
   
   ✅ Должны видеть таблицы: users, products, orders, и т.д.
@@ -158,25 +157,16 @@
   
   ✅ Должно вывести:
   ```
-  ✓ Cleaned existing data
-  ✓ Created locations
-  ✓ Created ADMIN: admin@example.com
-  ✓ Created BUSINESS owner: business@example.com
-  ✓ Created USER: user@example.com
-  ✓ Created business: Эко-Кафе "Зеленый лист"
-  ✓ Created products
-  ✓ Added business to favorites
   ✅ Seed completed successfully!
   
   📝 Test credentials:
-     Admin:    admin@example.com / password123
      Business: business@example.com / password123
      User:     user@example.com / password123
   ```
 
 - [ ] Проверили данные в БД:
   ```bash
-  docker-compose exec postgres psql -U foodwaste_user -d foodwaste -c "SELECT email, role FROM users;"
+  docker compose --env-file .env.docker exec postgres psql -U foodsaver_user -d foodsaver -c "SELECT email, role FROM users;"
   ```
 
 ---
@@ -273,10 +263,10 @@ Content-Type: application/json
 
 ```bash
 # 1. Проверьте, что Docker запущен
-docker-compose ps
+docker compose --env-file .env.docker ps
 
 # 2. Если контейнер не запущен:
-docker-compose up -d
+docker compose --env-file .env.docker up -d
 
 # 3. Если порт 5432 уже занят:
 # Измените в .env.docker и .env:
@@ -301,8 +291,8 @@ PORT=3001
 npm run prisma:migrate:dev
 
 # Если совсем не работает:
-docker-compose down -v  # Удаляет БД
-docker-compose up -d    # Создаёт заново
+docker compose --env-file .env.docker down -v  # Удаляет БД
+docker compose --env-file .env.docker up -d    # Создаёт заново
 npm run prisma:migrate:dev
 npm run seed
 ```
